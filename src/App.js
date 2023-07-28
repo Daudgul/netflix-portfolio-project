@@ -23,20 +23,23 @@ function App() {
         }))
         // ...
       } else {
-        dispatch(logout)
+        dispatch(logout())
       }
     });
     return unsubscribe;
-  },[])
+  },[dispatch])
 
   return (
     <div className="app">
       <BrowserRouter>
-          <Routes>
-            <Route path="/" element={user ? <HomeScreen/> : <LoginScreen/>} />
-            <Route path="/about" element={ <h2>Hey what up Daud</h2>} />
-            <Route path="/profile" element={ <ProfilleScreen/>} />
-          </Routes>          
+            {!user ? (
+              <LoginScreen/> 
+            ) : (
+            <Routes>
+              <Route path="/" element={ <HomeScreen/>} />
+              <Route path="/profile" element={ <ProfilleScreen/>} />
+            </Routes>          
+            )}
       </BrowserRouter>
      
     </div>
