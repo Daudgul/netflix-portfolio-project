@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import './Row.css'
-import axios from './axios'
+import axios from './axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { openModal, setMovieId } from './features/userSlice';
 
 function Row({title, fetchUrl, isLargeRow = false }) {
     const [movies, setMovies] = useState([])
-    const base_url = 'https://image.tmdb.org/t/p/original/'
+    const base_url = 'https://image.tmdb.org/t/p/original/';
+    const dispatch = useDispatch();
 
     useEffect(() => {
         async function fetchData() {
@@ -25,6 +28,10 @@ function Row({title, fetchUrl, isLargeRow = false }) {
                 (movie) =>
                  (isLargeRow && movie.poster_path || !isLargeRow && movie.backdrop_path) && (                    
                    <img 
+                     onClick={() => {
+                      dispatch(openModal())
+                      dispatch(setMovieId(movie.id))
+                     }}
                      className={`row__poster ${isLargeRow && "row__posterLarge"}`} 
                      key={movie.id}
                      src={`${base_url}${

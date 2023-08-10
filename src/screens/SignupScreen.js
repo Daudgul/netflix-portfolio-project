@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import "./SignupScreen.css"
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebase';
@@ -6,9 +6,38 @@ import { auth } from '../firebase';
 function SignupScreen() {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
+    const [passwordError, setPasswordError] = useState(null);
+    const [emailError, setEmailError] = useState(null);
+
+    const validateName = (value) => {
+        if (!value) {
+          return '*Password is required';
+        }
+        return null;
+      };
+    
+      const validateEmail = (value) => {
+        if (!value) {
+          return 'Email is required';
+        }
+        if (!/\S+@\S+\.\S+/.test(value)) {
+          return '*Invalid email format';
+        }
+        return null;
+      };
+
 
     const register = (e) => {
         e.preventDefault();
+
+        const passwordValidationError = validateName(passwordRef.current.value);
+        const emailValidationError = validateEmail(emailRef.current.value);
+    
+        if (passwordValidationError || emailValidationError) {
+          setPasswordError(passwordValidationError);
+          setEmailError(emailValidationError);
+          return;
+        }
 
         createUserWithEmailAndPassword(
             auth,
@@ -22,6 +51,15 @@ function SignupScreen() {
     }
     const signIn = (e) => {
         e.preventDefault();
+
+        const passwordValidationError = validateName(passwordRef.current.value);
+        const emailValidationError = validateEmail(emailRef.current.value);
+    
+        if (passwordValidationError || emailValidationError) {
+          setPasswordError(passwordValidationError);
+          setEmailError(emailValidationError);
+          return;
+        }
 
         signInWithEmailAndPassword(
             auth,
@@ -37,7 +75,9 @@ function SignupScreen() {
     <div className='signupScreen'>
         <form>
             <h1>Sign In</h1>
+            {emailError && <span className={`error-message ${emailError ? 'visible' : ''}`}>{emailError}</span>}
             <input ref={emailRef} type="email" placeholder='Email' />
+            {passwordError && <span className={`error-message ${passwordError ? 'visible' : ''}`}>{passwordError}</span>}
             <input type="password" ref={passwordRef} placeholder='Password' />
             <button type='submit' onClick={signIn}>Sign In</button>
             <h4>
