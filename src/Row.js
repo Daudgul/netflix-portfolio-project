@@ -29,9 +29,12 @@ function Row({title, fetchUrl, isLargeRow = false }) {
                  (isLargeRow && movie.poster_path || !isLargeRow && movie.backdrop_path) && (                    
                    <img 
                      onClick={() => {
-                      const val = movie;
+                      var val = movie;
                       if(isLargeRow){
-                        val.media_type= 'tv'
+                         val = {
+                          ...movie,
+                          media_type: 'tv'
+                         }
                       }
                       dispatch(openModal())
                       dispatch(setMovie(val))

@@ -8,38 +8,44 @@ import { openModal, setMovie } from './features/userSlice';
 function Banner() {
   const dispatch = useDispatch()
 
-    const[movie, setMovie] = useState([])
+    const[movies, setMovies] = useState([])
     useEffect(() => {
       async function fetchData(){
         const request = await axios.get(requests.fetchNetflixOrignials);
-        setMovie(request.data.results[Math.floor(Math.random() * request.data.results.length - 1)])
+        setMovies(request.data.results[Math.floor(Math.random() * request.data.results.length - 1)])
         return request
       }
 
       fetchData()
     },[])
-    console.log(movie, 'movie')
+    console.log(movies, 'movie')
 
     function truncate(string, n){
         return string?.length > n ? string.substr(0,n - 1) + '...' : string
     }
+    function handleClick() {
+       const movie = {
+        ...movies,
+        media_type: 'tv'
+       }
+            dispatch(openModal())
+            dispatch(setMovie(movie))
+           
+    }
 
   return (
     <header className='banner' style={{
-        backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`, 
+        backgroundImage: `url("https://image.tmdb.org/t/p/original/${movies?.backdrop_path}")`, 
         backgroundSize: 'cover',
         backgroundPosition: "center center"
     }}>
         <div className="banner__contents">
-            <h1 className="banner__title">{movie?.title || movie?.name || movie?.orignal_name}</h1>
+            <h1 className="banner__title">{movies?.title || movies?.name || movies?.orignal_name}</h1>
             <div className="banner__buttons">
-                <button className='banner__button'  onClick={() => {
-                      dispatch(openModal())
-                      dispatch(setMovie(movie))
-                     }}>Play</button>
-                <button className='banner__button'>My List</button>
+                <button className='banner__button'  onClick={handleClick}>Play</button>
+                <button className='banner__button' onClick={handleClick}>! More Info</button>
             </div>
-            <h1 className="banner__description">{truncate(movie?.overview,150)}</h1>
+            <h1 className="banner__description">{truncate(movies?.overview,150)}</h1>
         </div>
         <div className="banner--fadeBotton"/>
     </header>

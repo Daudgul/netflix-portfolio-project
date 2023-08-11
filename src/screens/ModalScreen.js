@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import NameJumpAnimation from "../NameJumpAnimation ";
 import { API_KEY } from "../Requests";
 import { closeModal } from "../features/userSlice";
+import ReactPlayer from "react-player/youtube";
 
 
 
@@ -47,18 +48,22 @@ function ModalScreen() {
           ) : (
             <>
               {trailers && trailers.length > 0 ? (
-                <iframe
-                  title={trailers[0].name}
-                  className="video__screen"
-                  src={`https://www.youtube.com/embed/${trailers[0].key}?autoplay=1&mute=1`}
-                  allowFullScreen
-                ></iframe>
+                <div className="video__screen">
+                <ReactPlayer 
+                url={`https://www.youtube.com/embed/${trailers[0].key}`} 
+                playing={true}
+                controls={true}
+                width='100%'
+                height='100%'
+                />               
+                </div>
               ) : (
                <div className="loading">No video available</div>
               )}
             </>
           )}
         </div>
+        <button className="close__btn" onClick={() => dispatch(closeModal())}>X</button>
       </div>
     );
   }
