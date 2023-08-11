@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react'
 import './Banner.css'
 import axios from './axios'
 import requests from './Requests'
+import { useDispatch } from 'react-redux'
+import { openModal, setMovie } from './features/userSlice';
 
 function Banner() {
+  const dispatch = useDispatch()
 
     const[movie, setMovie] = useState([])
     useEffect(() => {
@@ -15,6 +18,7 @@ function Banner() {
 
       fetchData()
     },[])
+    console.log(movie, 'movie')
 
     function truncate(string, n){
         return string?.length > n ? string.substr(0,n - 1) + '...' : string
@@ -29,7 +33,10 @@ function Banner() {
         <div className="banner__contents">
             <h1 className="banner__title">{movie?.title || movie?.name || movie?.orignal_name}</h1>
             <div className="banner__buttons">
-                <button className='banner__button'>Play</button>
+                <button className='banner__button'  onClick={() => {
+                      dispatch(openModal())
+                      dispatch(setMovie(movie))
+                     }}>Play</button>
                 <button className='banner__button'>My List</button>
             </div>
             <h1 className="banner__description">{truncate(movie?.overview,150)}</h1>

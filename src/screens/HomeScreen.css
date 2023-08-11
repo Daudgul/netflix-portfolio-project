@@ -1,35 +1,4 @@
 .homescreen {
     position: relative;
 }
-.modal{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0,0,0,0.8);
-    color: #fff;
-}
-.modal__screen {
-    position: fixed;
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-.video__screen {
-    width: 90vw;
-    height: 45vw;
-}
 
-@media (min-width: 767px) {
-    .video__screen{
-      width: 560px;
-      height: 315px;
-    }
-    .modal__screen {
-        top: 50%;
-    }
-}

@@ -1,0 +1,20 @@
+.name-jump-animation {
+    display: flex;
+  }
+  
+  .jumping-word {
+    color: #f10e0e;
+    animation: jumpAnimation 0.5s ease-in-out infinite;
+    margin: 0 5px; /* Adjust spacing between words */
+    animation-delay: calc(0.1s * var(--delay-index)); 
+  }
+
+  
+  @keyframes jumpAnimation {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px); /* Adjust jump height */
+    }
+  }

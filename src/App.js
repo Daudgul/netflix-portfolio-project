@@ -12,7 +12,6 @@ import ProfilleScreen from './screens/ProfilleScreen';
 
 function App() {
   const user = useSelector(selectUser);
-  console.log(user,'user')
   const dispatch = useDispatch()
 
   useEffect(() => {

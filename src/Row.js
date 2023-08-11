@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Row.css'
 import axios from './axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { openModal, setMovieId } from './features/userSlice';
+import { openModal, setMovie } from './features/userSlice';
 
 function Row({title, fetchUrl, isLargeRow = false }) {
     const [movies, setMovies] = useState([])
@@ -29,8 +29,12 @@ function Row({title, fetchUrl, isLargeRow = false }) {
                  (isLargeRow && movie.poster_path || !isLargeRow && movie.backdrop_path) && (                    
                    <img 
                      onClick={() => {
+                      const val = movie;
+                      if(isLargeRow){
+                        val.media_type= 'tv'
+                      }
                       dispatch(openModal())
-                      dispatch(setMovieId(movie.id))
+                      dispatch(setMovie(val))
                      }}
                      className={`row__poster ${isLargeRow && "row__posterLarge"}`} 
                      key={movie.id}

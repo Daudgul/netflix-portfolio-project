@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   user: null,
   showModal: false,
-  movieId: null,
+  movie: null,
 };
 
 
@@ -24,14 +24,14 @@ export const userSlice = createSlice({
      closeModal:(state) => {
       state.showModal = false;
      },
-     setMovieId:(state,action) => {
-      state.movieId = action.payload;
+     setMovie:(state,action) => {
+      state.movie = action.payload;
      }
   },
 
 });
 
-export const { login, logout, openModal, closeModal, setMovieId } = userSlice.actions;
+export const { login, logout, openModal, closeModal, setMovie } = userSlice.actions;
 
 export const selectUser = (state) => state.user.user;
 
