@@ -36,11 +36,11 @@
     right: 4%;
     z-index: 2;
     border-radius: 50%;
-    padding: 10px;
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 400;
     cursor: pointer;
-    background-color: darkgray;
+    background-color: transparent;
+    border: none;
     color: #fff;
     transition:  0.5s ease;
 }
@@ -59,7 +59,6 @@
     .close__btn{
         top: 1%;
         right: 1%;
-        padding: 5px;
         font-size: 10px;
     }
 }
