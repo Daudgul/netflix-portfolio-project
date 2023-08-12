@@ -8,6 +8,7 @@ function SignupScreen() {
     const passwordRef = useRef(null);
     const [passwordError, setPasswordError] = useState(null);
     const [emailError, setEmailError] = useState(null);
+    const [loader, setLoader ] = useState(false)
 
     const validateName = (value) => {
         if (!value) {
@@ -28,7 +29,8 @@ function SignupScreen() {
 
 
     const register = (e) => {
-        e.preventDefault();
+      e.preventDefault();
+      setLoader(true)
 
         const passwordValidationError = validateName(passwordRef.current.value);
         const emailValidationError = validateEmail(emailRef.current.value);
@@ -47,10 +49,13 @@ function SignupScreen() {
             console.log(authUser)
         }).catch((error) => {
             alert(error.message)
+        }).finally(() => {
+          setLoader(false)
         })
     }
     const signIn = (e) => {
         e.preventDefault();
+        setLoader(true)
 
         const passwordValidationError = validateName(passwordRef.current.value);
         const emailValidationError = validateEmail(emailRef.current.value);
@@ -69,6 +74,8 @@ function SignupScreen() {
             console.log(authUser)
         }).catch((error) => {
             alert(error.message)
+        }).finally(() => {
+          setLoader(false)
         })
     }
   return (
@@ -79,7 +86,7 @@ function SignupScreen() {
             <input ref={emailRef} type="email" placeholder='Email' />
             {passwordError && <span className={`error-message ${passwordError ? 'visible' : ''}`}>{passwordError}</span>}
             <input type="password" ref={passwordRef} placeholder='Password' />
-            <button type='submit' onClick={signIn}>Sign In</button>
+            <button type='submit' onClick={signIn} style={{ backgroundColor: loader && 'gray' }} disabled={loader}>Sign In</button>
             <h4>
                 <span className='signupScreen__gray'>New to Netflix? </span>
                 <span className='signupScreen__link' onClick={register}>Sign Up now.</span>

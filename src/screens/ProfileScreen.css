@@ -57,3 +57,18 @@
     border-bottom: 1 px solid #282c2d;
     padding-bottom: 10px;
 }
+
+@media (max-width: 767px) {
+    .profileScreen__body  {
+        padding-top: 26%;
+        width: 87%;
+        
+    }
+    .profileScreen__body h1 {
+        font-size: 36px;
+
+    }
+    .profileScreen__info img{
+        display: none;
+    }
+}

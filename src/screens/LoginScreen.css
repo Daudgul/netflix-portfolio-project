@@ -78,3 +78,27 @@
     margin: 20px;
 
 }
+
+
+@media (max-width: 767px) {
+   .loginScreen__body{
+    top: 16%;
+   }
+
+   .loginScreen__body h1{
+    font-size: 2.5rem;
+   }
+
+   .loginScreen__input form  {
+    width: 100%;
+   }
+
+   .loginScreen__input form input {
+    width: 93%;
+    margin-bottom: 10px;
+   }
+
+   .loginScreen__getStarted {
+    width: 100%;
+   }
+}
