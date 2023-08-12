@@ -17,7 +17,7 @@ function Nav() {
 
   useEffect(() => {
      window.addEventListener("scroll",transtitionNavBar );
-     return () => window.removeEventListener("s croll" , transtitionNavBar)
+     return () => window.removeEventListener("scroll" , transtitionNavBar)
   }, [])
   return (
     <div className={`nav ${show && 'nav__black'}`}>

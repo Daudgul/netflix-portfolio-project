@@ -20,7 +20,6 @@ function ProfilleScreen() {
           console.log('Error signing out:', error);
         }
       }
-      console.log(useSelector(selectUser),'hi')
 
   return (
     <div className='profileScreen'>

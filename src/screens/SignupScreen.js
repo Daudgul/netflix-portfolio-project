@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import "./SignupScreen.css"
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom';
 
 function SignupScreen() {
     const emailRef = useRef(null);
@@ -9,6 +10,8 @@ function SignupScreen() {
     const [passwordError, setPasswordError] = useState(null);
     const [emailError, setEmailError] = useState(null);
     const [loader, setLoader ] = useState(false)
+
+    const navigate = useNavigate()
 
     const validateName = (value) => {
         if (!value) {
@@ -46,7 +49,7 @@ function SignupScreen() {
             emailRef.current.value,
             passwordRef.current.value
         ).then((authUser) => {
-            console.log(authUser)
+            navigate('/')
         }).catch((error) => {
             alert(error.message)
         }).finally(() => {
@@ -71,7 +74,7 @@ function SignupScreen() {
             emailRef.current.value,
             passwordRef.current.value
         ).then((authUser) => {
-            console.log(authUser)
+          navigate('/')
         }).catch((error) => {
             alert(error.message)
         }).finally(() => {
