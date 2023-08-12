@@ -53,6 +53,7 @@ function ModalScreen() {
                 url={`https://www.youtube.com/embed/${trailers[0].key}`} 
                 playing={true}
                 controls={true}
+                playsinline={true}
                 width='100%'
                 height='100%'
                 />               
